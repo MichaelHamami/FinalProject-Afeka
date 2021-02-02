@@ -1,0 +1,7 @@
+Django>=3.0.6,<3.1
+uWSGI>=2.0.18,<2.1
+django-bootstrap3-form>=1.1.0,<1.2
+bootstrap4>=0.1.0,<1
+django-crispy-forms>=1.10.0,<1.20
+psycopg2-binary>=2.8.6,<2.9
+social-auth-app-django>=4.0.0,<4.1

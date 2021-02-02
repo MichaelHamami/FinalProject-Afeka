@@ -34,7 +34,7 @@ SECRET_KEY = 'pgyd8=a5f4iyli70%n10klj*=7m4q=enw!rvtjq2%2q&9mygue'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -44,11 +44,7 @@ INSTALLED_APPS = [
     'problems.apps.ProblemsConfig',
     'learn.apps.LearnConfig',
     'crispy_forms',
-    'django_tables2',
-    'django_filters',
-    'bootstrap3',
     'bootstrap4',
-    'bootstrapform',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -109,7 +105,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432'
     },
 
@@ -118,7 +114,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432'
     },
 
@@ -126,11 +122,44 @@ DATABASES = {
         'NAME': 'postgres',
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'user_problems',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'PASSWORD': '123456',
+        'HOST': 'db',
         'PORT': '5432'
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     },
+#     'problems_db': {
+#         'NAME': 'postgres',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     },
+#
+#     'learning_db': {
+#         'NAME': 'postgres',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     },
+#
+#     'problems_db_read_user': {
+#         'NAME': 'postgres',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'USER': 'user_problems',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

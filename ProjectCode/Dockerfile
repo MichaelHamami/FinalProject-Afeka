@@ -10,6 +10,7 @@ RUN apk update && apk add gcc postgresql-dev zlib-dev jpeg-dev  python3-dev libr
 # install dependencies
 RUN pip install --upgrade pip
 RUN pip install cryptography==2.1.4
+RUN pip install django-sslserver==0.22
 
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
@@ -23,6 +24,8 @@ COPY ./sql_training /sql_training
 WORKDIR /sql_training
 
 EXPOSE 8000
+EXPOSE 443
+
 
 COPY ./scripts /scripts
 RUN chmod +x /scripts/*

@@ -2,11 +2,12 @@
 {% block content %}
 
 <body>
+    <br>
     <h4>Problem #8: In-Band Hard Problem - Safe Cracker </h4>
     <form method="POST">
         {% csrf_token %}
         <p>
-            <h6>Crack the safe and claim the secret code:</h6>
+            <h6>Crack the secret safe and claim the secret code:</h6>
             <hr class="divider">
             {% if logged_as_admin %}
                 <h6>Hello Admin</h6>
@@ -116,14 +117,16 @@
         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#DefendModal">Mitigation Methods</button>
     {% else %}
         {% if result %}
-            <table class="table">
-                {% for current_result in result %}
-                <tr>
-                    {% for value in current_result %}
-                    <td class="text-danger">{{value}}</td>
+            <table class="table table-striped">
+                <tbody class="text-center">
+                    {% for current_result in result %}
+                    <tr>
+                        {% for value in current_result %}
+                        <td class="text-danger">{{value}}</td>
+                        {% endfor %}
+                    </tr>
                     {% endfor %}
-                </tr>
-                {% endfor %}
+                </tbody>
             </table>
         {% endif %}
     {% endif %}

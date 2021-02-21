@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import sys
+from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,9 +21,6 @@ sys.path.append(os.path.join(PROJECT_ROOT, 'ProjectCode'))
 lib_path = os.path.abspath(os.path.join(__file__, '..', '..', '..', 'sql_training/users', 'sql_training/problems',
                                         'sql_training/users/models', 'sql_training/problems/models'))
 sys.path.append(lib_path)
-# print(sys.path)
-
-# sys.path.append(PROJECT_ROOT)
 
 
 # Quick-start development settings - unsuitable for production
@@ -34,7 +32,7 @@ SECRET_KEY = 'pgyd8=a5f4iyli70%n10klj*=7m4q=enw!rvtjq2%2q&9mygue'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -44,7 +42,7 @@ INSTALLED_APPS = [
     'problems.apps.ProblemsConfig',
     'learn.apps.LearnConfig',
     'crispy_forms',
-    'bootstrap4',
+    'sslserver',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -64,6 +62,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+    'users.middleware_change_password_req.ChangePasswordCheck'
+
 ]
 
 ROOT_URLCONF = 'sql_training.urls'
@@ -141,16 +141,6 @@ DATABASES = {
 #         'HOST': 'localhost',
 #         'PORT': '5432'
 #     },
-#
-#     'learning_db': {
-#         'NAME': 'postgres',
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     },
-#
 #     'problems_db_read_user': {
 #         'NAME': 'postgres',
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -164,6 +154,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
+# TODO - remove comments before deployment
 AUTH_PASSWORD_VALIDATORS = [
     # {
     #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -223,3 +214,6 @@ EMAIL_HOST_PASSWORD = 'xdiedympvrlowcni'
 # Google sign up Settings
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '941393807189-f3c8veghn07f4squdgkkf33iidde6qa0.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'izSenW8uf_sV5GCvL4r2PE8G'
+
+# Password reset Settings
+TimeToExpire = timedelta(seconds=60)

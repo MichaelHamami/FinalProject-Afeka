@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import sys
-from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -214,6 +213,3 @@ EMAIL_HOST_PASSWORD = 'xdiedympvrlowcni'
 # Google sign up Settings
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '941393807189-f3c8veghn07f4squdgkkf33iidde6qa0.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'izSenW8uf_sV5GCvL4r2PE8G'
-
-# Password reset Settings
-TimeToExpire = timedelta(seconds=60)

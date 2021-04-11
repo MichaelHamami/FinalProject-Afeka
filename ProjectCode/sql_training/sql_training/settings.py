@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'learn.apps.LearnConfig',
     'crispy_forms',
     'sslserver',
+    'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -94,39 +95,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 WSGI_APPLICATION = 'sql_training.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-    'problems_db': {
-        'NAME': 'postgres',
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': '5432'
-    },
-
-    'learning_db': {
-        'NAME': 'postgres',
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': '5432'
-    },
-
-    'problems_db_read_user': {
-        'NAME': 'postgres',
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'user_problems',
-        'PASSWORD': '123456',
-        'HOST': 'db',
-        'PORT': '5432'
-    }
-}
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -137,18 +105,51 @@ DATABASES = {
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'USER': 'postgres',
 #         'PASSWORD': 'postgres',
-#         'HOST': 'localhost',
+#         'HOST': 'db',
 #         'PORT': '5432'
 #     },
+#
+#     'learning_db': {
+#         'NAME': 'postgres',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'db',
+#         'PORT': '5432'
+#     },
+#
 #     'problems_db_read_user': {
 #         'NAME': 'postgres',
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'USER': 'user_problems',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'localhost',
+#         'PASSWORD': '123456',
+#         'HOST': 'db',
 #         'PORT': '5432'
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'problems_db': {
+        'NAME': 'postgres',
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '5432'
+    },
+    'problems_db_read_user': {
+        'NAME': 'postgres',
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'user_problems',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '5432'
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -199,6 +200,7 @@ LOGIN_REDIRECT_URL = 'profile'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
+
 SITE_ID = 1
 
 # Mail settings
@@ -210,6 +212,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'cyberprojectdjango@gmail.com'
 EMAIL_HOST_PASSWORD = 'xdiedympvrlowcni'
 
+
 # Google sign up Settings
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '941393807189-f3c8veghn07f4squdgkkf33iidde6qa0.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'izSenW8uf_sV5GCvL4r2PE8G'
+

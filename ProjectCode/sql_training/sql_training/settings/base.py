@@ -12,12 +12,15 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import sys
+import django_heroku
+import environ
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 sys.path.append(os.path.join(PROJECT_ROOT, 'ProjectCode'))
-lib_path = os.path.abspath(os.path.join(__file__, '..', '..', '..', 'sql_training/users', 'sql_training/problems',
+lib_path = os.path.abspath(os.path.join(__file__, '../..', '..', '..', 'sql_training/users', 'sql_training/problems',
                                         'sql_training/users/models', 'sql_training/problems/models'))
 sys.path.append(lib_path)
 
@@ -28,10 +31,7 @@ sys.path.append(lib_path)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'pgyd8=a5f4iyli70%n10klj*=7m4q=enw!rvtjq2%2q&9mygue'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'learn.apps.LearnConfig',
     'crispy_forms',
     'sslserver',
+    "django_heroku",
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -95,6 +97,43 @@ AUTHENTICATION_BACKENDS = [
 ]
 WSGI_APPLICATION = 'sql_training.wsgi.application'
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    # 'problems_db': {
+    #     'NAME': 'postgres',
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'postgres',
+    #     'HOST': 'db',
+    #     'PORT': '5432'
+    # },
+    #
+    # 'learning_db': {
+    #     'NAME': 'postgres',
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'postgres',
+    #     'HOST': 'db',
+    #     'PORT': '5432'
+    # },
+    #
+    # 'problems_db_read_user': {
+    #     'NAME': 'postgres',
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'USER': 'user_problems',
+    #     'PASSWORD': '123456',
+    #     'HOST': 'db',
+    #     'PORT': '5432'
+    # }
+}
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+DATABASES['default']['CONN_MAX_AGE'] = 500
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -105,51 +144,18 @@ WSGI_APPLICATION = 'sql_training.wsgi.application'
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'USER': 'postgres',
 #         'PASSWORD': 'postgres',
-#         'HOST': 'db',
+#         'HOST': 'localhost',
 #         'PORT': '5432'
 #     },
-#
-#     'learning_db': {
-#         'NAME': 'postgres',
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'db',
-#         'PORT': '5432'
-#     },
-#
 #     'problems_db_read_user': {
 #         'NAME': 'postgres',
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'USER': 'user_problems',
-#         'PASSWORD': '123456',
-#         'HOST': 'db',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'localhost',
 #         'PORT': '5432'
 #     }
 # }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-    'problems_db': {
-        'NAME': 'postgres',
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-        'PORT': '5432'
-    },
-    'problems_db_read_user': {
-        'NAME': 'postgres',
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'user_problems',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-        'PORT': '5432'
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -217,3 +223,7 @@ EMAIL_HOST_PASSWORD = 'xdiedympvrlowcni'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '941393807189-f3c8veghn07f4squdgkkf33iidde6qa0.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'izSenW8uf_sV5GCvL4r2PE8G'
 
+# Heroko enviroment
+django_heroku.settings(locals())
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

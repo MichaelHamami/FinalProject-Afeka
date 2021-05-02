@@ -1,12 +1,9 @@
 FROM python:3.8-alpine
 
 # set environment variables
-#ENV PATH="/scripts:${PATH}"
+ENV PATH="/scripts:${PATH}"
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV DATABASE_URL="postgresql-flexible-50645"
-ENV SOMETHING="WORKING-SO-COOL"
-
 
 # install psycopg2 dependencies and dev dependencies
 RUN apk update && apk add gcc postgresql-dev zlib-dev jpeg-dev  python3-dev libressl-dev libffi-dev musl-dev libc-dev openssl-dev linux-headers && pip3 install --upgrade pip
@@ -26,8 +23,9 @@ RUN mkdir /sql_training
 COPY ./sql_training /sql_training
 WORKDIR /sql_training
 
-#EXPOSE 8000
-#EXPOSE 443
+EXPOSE 8000
+EXPOSE 443
+
 
 COPY ./scripts /scripts
 RUN chmod +x /scripts/*
@@ -38,8 +36,5 @@ RUN mkdir -p /vol/web/static
 RUN adduser -D user
 RUN chown -R user:user /vol
 RUN chmod -R 755 /vol/web
-# NEW
-#RUN python /sql_training/manage.py runserver 0.0.0.0:8000
-
 USER user
-#CMD ["entrypoint.sh"]
+CMD ["entrypoint.sh"]

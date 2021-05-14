@@ -95,39 +95,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 WSGI_APPLICATION = 'sql_training.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     },
-#     'problems_db': {
-#         'NAME': 'postgres',
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'db',
-#         'PORT': '5432'
-#     },
-#
-#     'learning_db': {
-#         'NAME': 'postgres',
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'db',
-#         'PORT': '5432'
-#     },
-#
-#     'problems_db_read_user': {
-#         'NAME': 'postgres',
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'USER': 'user_problems',
-#         'PASSWORD': '123456',
-#         'HOST': 'db',
-#         'PORT': '5432'
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -138,36 +105,68 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432'
     },
+
+    'learning_db': {
+        'NAME': 'postgres',
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': '5432'
+    },
+
     'problems_db_read_user': {
         'NAME': 'postgres',
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'user_problems',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
+        'PASSWORD': '123456',
+        'HOST': 'db',
         'PORT': '5432'
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     },
+#     'problems_db': {
+#         'NAME': 'postgres',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     },
+#     'problems_db_read_user': {
+#         'NAME': 'postgres',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'USER': 'user_problems',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
-# TODO - remove comments before deployment
 AUTH_PASSWORD_VALIDATORS = [
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    # },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    # },
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
 
 # Internationalization
